@@ -10,8 +10,8 @@ tabla.innerHTML+=`
                 <td scope="row">${item.id}</td>
                 <td>${item.title}</td>
                 <td>${item.body}</td>
-                <td><button type="button" class="btn btn-primary"><i class="bi bi-pencil-square"></i>editar</button></td>
-                <td><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i>eliminar</button></td>
+                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Sexoo"><i class="bi bi-pencil-square"></i>editar</button></td>
+                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#Sexoo2"><i class="bi bi-trash"></i>eliminar</button></td>
     </tr>
 
 
