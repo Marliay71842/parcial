@@ -17,6 +17,8 @@ tabla.innerHTML+=`
 
 `})
 }
+
+
 const guardardata=async ()=>{
 let titulo=document.querySelector("#title").value;
 let body=document.querySelector("#body").value;
@@ -63,5 +65,10 @@ else{
       })
 }
     
+
+}
+const eliminarpost=async ()=>{
+    
+tr.innerHTML="";
 
 }
