@@ -93,7 +93,7 @@
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="bi bi-pencil-fill"></i> Editar post</h1>
 
-        
+      
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -101,21 +101,23 @@
             <h6>¿Deseas editar el post?</h6>
             <br>
             <label for="exampleFormControlInput1" class="form-label">Title</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            <input type="text"  class="form-control" id="tedit" placeholder="Title edit">
           </div>
           <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Body</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea class="form-control"  id="edibody"    rows="3"></textarea>
+            <input type="hidden" value="0" id="eid">
+            <input type="hidden" value="0" id="euserid">
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary"  >Guardar</button>
+          <button type="button" class="btn btn-primary" onclick="guardarPost()"  >Guardar</button>
         </div>
       </div>
     </div>
   </div>
-  
+
   <div class="modal fade" id="Sexoo2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
@@ -125,10 +127,11 @@
         </div>
         <div class="modal-body">
           <h6>¿Deseas eliminar el post?</h6>
+          <input type="hidden" value="0" id="deleteid">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ño</button>
-          <button type="button" class="btn btn-primary" onclick="eliminarpost()">Chi</button>
+          <button type="button" class="btn btn-primary" onclick="deletePost()">Chi</button>
         </div>
       </div>
     </div>
