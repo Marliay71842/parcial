@@ -1,0 +1,19 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+h1{
+    font-size: 100px;
+    color: rgba(3,48,1,1);
+}
+body{
+   background: greenyellow;
+    color:  rgba(84,99,0,1);
+    animation: baa 15s ease 0s;
+    animation-iteration-count: infinite;
+    font-size: 20px;
+    font-family: 'Blaka Hollow', cursive;
+    align-items: center;
+    justify-content: center;
+}
