@@ -8,3 +8,4 @@ div.innerHTML=`  <img src="${response.message}" >
 
 }
 setInterval(changeDog,5000);
+
