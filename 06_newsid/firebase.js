@@ -2,8 +2,11 @@
 
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js";
-  
+
+// https://firebase.google.com/docs/web/setup#available-libraries
+
   const firebaseConfig = {
+    
     apiKey: "AIzaSyD8ueD7dyw2M_wYFXCSDEpZNdpnf3CNOQM",
     authDomain: "fir-716b4.firebaseapp.com",
     projectId: "fir-716b4",

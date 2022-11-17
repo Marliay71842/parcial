@@ -12,7 +12,8 @@ html {
     margin:0;
     padding:0;
     font-family: sans-serif;
-    background: linear-gradient(#42057c, #243b55);
+    background: #212529;
+
   }
   
   .login-box {
