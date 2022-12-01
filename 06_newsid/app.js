@@ -14,11 +14,32 @@ const auth = getAuth(app);
 
 
 
+
 onAuthStateChanged(auth, (user) =>{
   const containe=document.querySelector("#container");
   checarEstado(user);
   if(user){
-    containe.innerHTML=`<h1>BIENVENIDO: ${user.email}</h1>`
+    containe.innerHTML=`<h1>BIENVENIDO: ${user.email}</h1>
+    <button type="button" data-bs-toggle="modal" data-bs-target="#addModal"  class="btn btn-primary btn-lg">Agregar Alumno   <i class="bi bi-person-plus"></i></button>
+<br>
+<br>
+    <table id="container2">
+            <thead>
+              <tr>
+                <th><h1>No.Control</h1></th>
+                <th><h1>Nombre</h1></th>
+                <th><h1>Apellido P</h1></th>
+                <th><h1>Apellido M</h1></th>
+                <th><h1>Carrrera</h1></th>
+                <th><h1>Editar</h1></th>
+                <th><h1>Eliminar</h1></th>
+              </tr>
+            </thead>
+      
+          </table>
+    
+    
+    `
     const uid= user.uid;
   } else{
     containe.innerHTML=`<h1>No hay usuarios  <i class="bi bi-person-exclamation"></i></h1>`
@@ -43,16 +64,20 @@ try{
 
 });
 
+
+
 const checarEstado=(user=null)=>{
   console.log(user);
-  if(user==null){
-document.querySelector("#btncrear").style.display="block";
-document.querySelector("#btniniciar").style.display="block";
-document.querySelector("#cerrar").style.display="none";
+  if(user== null){
+  document.querySelector("#crear").style.display="block";
+  document.querySelector("#iniciar").style.display="block";
+  document.querySelector("#cerrar").style.display="none";
+  
   }else{
-  document.querySelector("#btncrear").style.display="none";
-document.querySelector("#btniniciar").style.display="none";
+document.querySelector("#crear").style.display="none";
+document.querySelector("#iniciar").style.display="none";
 document.querySelector("#cerrar").style.display="block";
+
   }
 }
 
@@ -74,6 +99,7 @@ btncr.addEventListener('click', async(e)=>{
 const btnini=document.querySelector("#btniniciar");
 btnini.addEventListener('click', async(e)=>{
   e.preventDefault();
+  
   const email=document.querySelector("#iniciaremail");
   const password=document.querySelector("#iniciarcontra");
 try{
@@ -117,26 +143,26 @@ const code=error.code;
 if (code==='auth/invalid-email'){
   Swal.fire({
       icon: 'error',
-     
+
       text: 'correo electronico invalido',
         })
 }
 if (code==='auth/weak-password'){
   Swal.fire({
       icon: 'error',
-     
+  
       text: 'contraseña invalida',
         })
 }
 if (code==='auth/email-already-in-user'){
   Swal.fire({
       icon: 'error',
-     
+    
       text: 'correo electronico ya en uso',
         })
 }
 }});
-
+checarEstado();
 
 
 
