@@ -20,7 +20,7 @@ onAuthStateChanged(auth, (user) =>{
   checarEstado(user);
   if(user){
     containe.innerHTML=`<h1>BIENVENIDO: ${user.email}</h1>
-    <button type="button" data-bs-toggle="modal" data-bs-target="#addModal"  class="btn btn-primary btn-lg">Agregar Alumno   <i class="bi bi-person-plus"></i></button>
+    <button  type="button" data-bs-toggle="modal" data-bs-target="#addModal"  class="btn btn-primary btn-lg">Agregar Alumno   <i class="bi bi-person-plus"></i></button>
 <br>
 <br>
     <table id="container2">

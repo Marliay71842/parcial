@@ -27,18 +27,15 @@ window.addEventListener("DOMContentLoaded", async (e) => {
         querySnapshot.forEach((doc) => {
             const alumno = doc.data();
             divAlumnos.innerHTML += `
-            <tbody>
-            <tr>
-            <td>${alumno.nocontrol}</td>
-            <td>${alumno.nombre}</td>
-            <td>${alumno.apaterno}</td>
-            <td>${alumno.amaterno}</td>
-            <td>${alumno.carrera}</td>
-            <td><button class="btn btn-danger btnEliminarAlumno" data-id="${doc.id}"><i class="bi bi-trash"></i></button></td>
-            <td><button class="btn btn-primary btnEditarAlumno" data-bs-toggle="modal" data-bs-target="#editModal"   data-id="${doc.id}"><i class="bi bi-pencil"></i></button></td>
-        </tr>
-          </tbody>
-                `;
+                <tr>
+                    <td>${alumno.nocontrol}</td>
+                    <td>${alumno.nombre}</td>
+                    <td>${alumno.apaterno}</td>
+                    <td>${alumno.amaterno}</td>
+                    <td>${alumno.carrera}</td>
+                    <td><button class="btn btn-danger btnEliminarAlumno" data-id="${doc.id}"><i class="bi bi-trash"></i></button></td>
+                    <td><button class="btn btn-primary btnEditarAlumno" data-bs-toggle="modal" data-bs-target="#eddModal"   data-id="${doc.id}"><i class="bi bi-pencil"></i></button></td>
+                </tr>`;
         });
  
 
@@ -49,7 +46,7 @@ window.addEventListener("DOMContentLoaded", async (e) => {
                 id=btn.dataset.id;
                 console.log(btn.dataset.id);
                 Swal.fire({
-                    title: 'Estás seguro de eliminar es Alumno?',
+                    title: 'Estás seguro de eliminar el Alumno?',
                     showDenyButton: true,
                     confirmButtonText: 'Si',
                     denyButtonText: `No`,
@@ -91,7 +88,7 @@ window.addEventListener("DOMContentLoaded", async (e) => {
     
 });
 
-const btnAgregarAlumno=document.querySelector("#alumnoag");
+const btnAgregarAlumno=document.querySelector("#alumnoagrega");
 btnAgregarAlumno.addEventListener("click",()=>{
     const nocontrol=document.querySelector("#nocontrol").value;
     const nombre=document.querySelector("#nombre").value;
@@ -139,7 +136,7 @@ btnGuardarAlumno.addEventListener("click",()=>{
         updateDoc(doc(db, "alumnos", id), alumno);
         editStatus = false;
         id = "";
-        bootstrap.Modal.getInstance(document.getElementById('editModal')).hide();
+        bootstrap.Modal.getInstance(document.getElementById('eddModal')).hide();
     }
 
     Swal.fire({
@@ -149,8 +146,4 @@ btnGuardarAlumno.addEventListener("click",()=>{
     })
     document.querySelector("#formEditAlumno").reset();
 });
-
-
-
-
 
