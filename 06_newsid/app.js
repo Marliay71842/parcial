@@ -21,20 +21,23 @@ onAuthStateChanged(auth, (user) =>{
   if(user){
     containe.innerHTML=`<h1>BIENVENIDO: ${user.email}</h1>
     <button  type="button" data-bs-toggle="modal" data-bs-target="#addModal"  class="btn btn-primary btn-lg">Agregar Alumno   <i class="bi bi-person-plus"></i></button>
+
+    <br>
 <br>
-<br>
+<table id="container3">
+    <thead>
+    <tr>
+      <th><h1>No.Control</h1></th>
+      <th><h1>Nombre</h1></th>
+      <th><h1>Apellido P</h1></th>
+      <th><h1>Apellido M</h1></th>
+      <th><h1>Carrrera</h1></th>
+      <th><h1>Editar</h1></th>
+      <th><h1>Eliminar</h1></th>
+    </tr>
+  </thead>
     <table id="container2">
-            <thead>
-              <tr>
-                <th><h1>No.Control</h1></th>
-                <th><h1>Nombre</h1></th>
-                <th><h1>Apellido P</h1></th>
-                <th><h1>Apellido M</h1></th>
-                <th><h1>Carrrera</h1></th>
-                <th><h1>Editar</h1></th>
-                <th><h1>Eliminar</h1></th>
-              </tr>
-            </thead>
+  
       
           </table>
     

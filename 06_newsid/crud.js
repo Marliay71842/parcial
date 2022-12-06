@@ -1,16 +1,17 @@
 import {
     getFirestore,
-  collection,
-  getDocs,
-  onSnapshot,
-  addDoc,
-  deleteDoc,
-  doc,
-  getDoc,
-  updateDoc
- } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js"
-
-const db=getFirestore();
+    collection,
+    getDocs,
+    onSnapshot,
+    addDoc,
+    deleteDoc,
+    doc,
+    getDoc,
+    updateDoc
+ } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
+ 
+ import {app} from './firebase.js ';
+const db=getFirestore(app);
 const coleccion=collection(db,"alumnos");
 
 let editStatus = false;
@@ -27,6 +28,7 @@ window.addEventListener("DOMContentLoaded", async (e) => {
         querySnapshot.forEach((doc) => {
             const alumno = doc.data();
             divAlumnos.innerHTML += `
+            
                 <tr>
                     <td>${alumno.nocontrol}</td>
                     <td>${alumno.nombre}</td>
@@ -90,6 +92,7 @@ window.addEventListener("DOMContentLoaded", async (e) => {
 
 const btnAgregarAlumno=document.querySelector("#alumnoagrega");
 btnAgregarAlumno.addEventListener("click",()=>{
+   
     const nocontrol=document.querySelector("#nocontrol").value;
     const nombre=document.querySelector("#nombre").value;
     const apaterno=document.querySelector("#apaterno").value;
