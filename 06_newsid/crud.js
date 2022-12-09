@@ -8,9 +8,9 @@ import {
     doc,
     getDoc,
     updateDoc
- } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
  
- import {app} from './firebase.js ';
+import {app} from './firebase.js ';
 const db=getFirestore(app);
 const coleccion=collection(db,"alumnos");
 
@@ -37,6 +37,7 @@ window.addEventListener("DOMContentLoaded", async (e) => {
                     <td>${alumno.carrera}</td>
                     <td><button class="btn btn-danger btnEliminarAlumno" data-id="${doc.id}"><i class="bi bi-trash"></i></button></td>
                     <td><button class="btn btn-primary btnEditarAlumno" data-bs-toggle="modal" data-bs-target="#eddModal"   data-id="${doc.id}"><i class="bi bi-pencil"></i></button></td>
+                    <td><button class="btn btn-info btnQRAlumnos" data-bs-toggle="modal" data-bs-target="#qrModal"   data-id="${doc.id}"><i class="bi bi-qr-code"></i></button></td>
                 </tr>`;
         });
  
@@ -149,4 +150,23 @@ btnGuardarAlumno.addEventListener("click",()=>{
     })
     document.querySelector("#formEditAlumno").reset();
 });
+
+const btnQRAlumno = document.querySelectorAll(".btnQRAlumnos");
+btnQRAlumno.forEach((btn) => {
+    btn.addEventListener("click", async (e) => {
+        try {
+            id=btn.dataset.id;
+            console.log(id);
+            const data= await getDoc(doc(db, "alumnos", id));
+            const alumno = data.data();                   
+                    const contenedorQR =document.getElementById('ptmnojala');
+                    contenedorQR.innerHTML=""
+                    const QR = new QRCode (contenedorQR);
+                    QR.makeCode(id);
+                    
+                } catch(error){
+                    console.log(error);
+                }
+            });
+        });
 

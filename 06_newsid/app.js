@@ -6,7 +6,9 @@ import { getAuth,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
-  signInWithPopup 
+  signInWithPopup,
+  signInAnonymously,
+  RecaptchaVerifier
 } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
  
 let user=null;
@@ -34,6 +36,7 @@ onAuthStateChanged(auth, (user) =>{
       <th><h1>Carrrera</h1></th>
       <th><h1>Editar</h1></th>
       <th><h1>Eliminar</h1></th>
+      <th><h1>QR</h1></th>
     </tr>
   </thead>
     <table id="container2">
@@ -67,20 +70,76 @@ try{
 
 });
 
+//btn fone
+const btnFon=document.querySelector("#telfono");
+btnFon.addEventListener('click', async(e)=>{ 
+e.preventDefault();
+try{
+  const{value: tel}= await Swal.fire({
+    title: 'Ingrese Su Telefono',
+    input: 'tel',
+    inputLabel: 'Telefono',
+    inputValue: '+52 55 8304 6305',
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    cancelButtonText: 'Cancelar',
+    confirmButtonText: 'Enviar codigo',
+    showCancelButton: true,
+  })
+window.RecaptchaVerifier= new RecaptchaVerifier('recaptcha', {
+'size':'invisible'}, auth);
+const appVerifier = window.recaptchaVerifier;
+const confirmationResult = await signInWithPhoneNumber(auth, tel, appVerifier)
+console.log(confirmationResult );
+window.confirmationResult=confirmationResult;
+const {value:code}=await Swal.fire({
+  title: 'Ingrese Su Codigo de verificacion',
+  input: 'text',
+  inputLabel: 'codigo',
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  cancelButtonText: 'Cancelar',
+  confirmButtonText: 'Verificar',
+  showCancelButton: true, 
+})
+const result= await window.confirmationResult.confirm(code)
+user=result.user;
+checarEstado(user)
+}catch(error){
+  Swal.fire('Error al iniciar sesion con el telefono');
+}
 
+});
+
+
+const btnAnonimo=document.querySelector("#btinco");
+btnAnonimo.addEventListener('click', async(e)=>{
+  e.preventDefault();
+  try{
+    const result= await signInAnonymously(auth);
+    console.log(result);
+    user=result.user;
+    bootstrap.Modal.getInstance(document.getElementById('iniciarModal')).hide();
+  }catch(error){
+    Swal.fire('Error Al iniciar secion de anonimo')
+  }
+
+});
 
 const checarEstado=(user=null)=>{
   console.log(user);
   if(user== null){
   document.querySelector("#crear").style.display="block";
   document.querySelector("#iniciar").style.display="block";
+  document.querySelector("#telfono").style.display="block";
   document.querySelector("#cerrar").style.display="none";
-  
+  document.querySelector("#sqes").style.display="none";
   }else{
 document.querySelector("#crear").style.display="none";
 document.querySelector("#iniciar").style.display="none";
+document.querySelector("#telfono").style.display="none";
 document.querySelector("#cerrar").style.display="block";
-
+document.querySelector("#sqes").style.display="block";
   }
 }
 
@@ -165,6 +224,10 @@ if (code==='auth/email-already-in-user'){
         })
 }
 }});
+
+
+
+
 checarEstado();
 
 
