@@ -52,6 +52,45 @@ onAuthStateChanged(auth, (user) =>{
   }
 })
 
+const btnFone=document.querySelector("#telfonoini");
+btnFone.addEventListener('click', async(e)=>{
+  e.preventDefault();
+  try{
+    const {value:tel}=await Swal.fire({
+      title: 'Place your phone number',
+      input: 'tel',
+      inputLabel: 'Phone',
+      inputValue: '+525569696969',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Send verify code',
+      showCancelButton: true,
+    })
+    window.recaptchaVerifier=new RecaptchaVerifier('recaptcha', {'size':'invisible'}, auth);
+    const appVerifier=window.recaptchaVerifier;
+    const confirmationResult=await signInWithPhoneNumber(auth, tel, appVerifier)
+    console.log(confirmationResult);
+    window.confirmationResult=confirmationResult;
+    const {value:code}=await Swal.fire({
+      title: 'Place your verify code',
+      input: 'text',
+      inputLabel: 'Code',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Verify',
+      showCancelButton: true,
+    })
+
+    const result=await window.confirmationResult.confirm(code)
+    user=result.user;
+    checarEstado(user)
+
+  }catch(error){
+    Swal.fire('Don´t is possible login whit your number phone');
+  }
+  });
 
 
 const btngogle  =document.querySelector("#btngo")
@@ -70,46 +109,7 @@ try{
 
 });
 
-//btn fone
-const btnFon=document.querySelector("#telfono");
-btnFon.addEventListener('click', async(e)=>{ 
-e.preventDefault();
-try{
-  const{value: tel}= await Swal.fire({
-    title: 'Ingrese Su Telefono',
-    input: 'tel',
-    inputLabel: 'Telefono',
-    inputValue: '+52 55 8304 6305',
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    cancelButtonText: 'Cancelar',
-    confirmButtonText: 'Enviar codigo',
-    showCancelButton: true,
-  })
-window.RecaptchaVerifier= new RecaptchaVerifier('recaptcha', {
-'size':'invisible'}, auth);
-const appVerifier = window.recaptchaVerifier;
-const confirmationResult = await signInWithPhoneNumber(auth, tel, appVerifier)
-console.log(confirmationResult );
-window.confirmationResult=confirmationResult;
-const {value:code}=await Swal.fire({
-  title: 'Ingrese Su Codigo de verificacion',
-  input: 'text',
-  inputLabel: 'codigo',
-  confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
-  cancelButtonText: 'Cancelar',
-  confirmButtonText: 'Verificar',
-  showCancelButton: true, 
-})
-const result= await window.confirmationResult.confirm(code)
-user=result.user;
-checarEstado(user)
-}catch(error){
-  Swal.fire('Error al iniciar sesion con el telefono');
-}
 
-});
 
 
 const btnAnonimo=document.querySelector("#btinco");
@@ -131,13 +131,13 @@ const checarEstado=(user=null)=>{
   if(user== null){
   document.querySelector("#crear").style.display="block";
   document.querySelector("#iniciar").style.display="block";
-  document.querySelector("#telfono").style.display="block";
+  document.querySelector("#telfonoini").style.display="block";
   document.querySelector("#cerrar").style.display="none";
   document.querySelector("#sqes").style.display="none";
   }else{
 document.querySelector("#crear").style.display="none";
 document.querySelector("#iniciar").style.display="none";
-document.querySelector("#telfono").style.display="none";
+document.querySelector("#telfonoini").style.display="none";
 document.querySelector("#cerrar").style.display="block";
 document.querySelector("#sqes").style.display="block";
   }

@@ -41,7 +41,24 @@ window.addEventListener("DOMContentLoaded", async (e) => {
                 </tr>`;
         });
  
-
+        const btnQRAlumno = document.querySelectorAll(".btnQRAlumnos");
+        btnQRAlumno.forEach((btn) => {
+            btn.addEventListener("click", async (e) => {
+                try {
+                    id=btn.dataset.id;
+                    console.log(id);
+                    const data= await getDoc(doc(db, "alumnos", id));
+                    const alumno = data.data();                   
+                            const contenedorQR =document.getElementById('ptmnojala');
+                            contenedorQR.innerHTML=""
+                            const QR = new QRCode (contenedorQR);
+                            QR.makeCode(id);
+                            
+                        } catch(error){
+                            console.log(error);
+                        }
+                    });
+                });
         const btnsDelete = document.querySelectorAll(".btnEliminarAlumno");
         //console.log(btnsDelete);
         btnsDelete.forEach((btn,idx) =>
@@ -151,22 +168,5 @@ btnGuardarAlumno.addEventListener("click",()=>{
     document.querySelector("#formEditAlumno").reset();
 });
 
-const btnQRAlumno = document.querySelectorAll(".btnQRAlumnos");
-btnQRAlumno.forEach((btn) => {
-    btn.addEventListener("click", async (e) => {
-        try {
-            id=btn.dataset.id;
-            console.log(id);
-            const data= await getDoc(doc(db, "alumnos", id));
-            const alumno = data.data();                   
-                    const contenedorQR =document.getElementById('ptmnojala');
-                    contenedorQR.innerHTML=""
-                    const QR = new QRCode (contenedorQR);
-                    QR.makeCode(id);
-                    
-                } catch(error){
-                    console.log(error);
-                }
-            });
-        });
+
 
