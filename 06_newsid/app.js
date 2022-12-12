@@ -133,12 +133,14 @@ const checarEstado=(user=null)=>{
 
   document.querySelector("#cerrar").style.display="none";
   document.querySelector("#sqes").style.display="none";
+  document.querySelector("#telefono").style.display="block";
   }else{
 document.querySelector("#crear").style.display="none";
 document.querySelector("#iniciar").style.display="none";
 
 document.querySelector("#cerrar").style.display="block";
 document.querySelector("#sqes").style.display="block";
+document.querySelector("#telefono").style.display="none";
   }
 }
 
